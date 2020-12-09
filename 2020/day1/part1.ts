@@ -10,4 +10,3 @@ values.forEach(element => {
 		process.exit();
 	}
 });
-
