@@ -43,4 +43,4 @@ res = player1 if player1 else player2
 ret = 0
 for i in range(1, len(res) + 1):
 	ret += res.pop() * i
-print(ret)
+print(ret) 
