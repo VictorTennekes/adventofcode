@@ -1,8 +1,7 @@
-import std/strutils
-import std/sequtils
+import std/[strutils, sequtils, sugar]
 
 const
- input = readFile("input.txt").splitLines().filterIt(it != "").mapIt(parseInt(it))
+ input = readFile("input.txt").strip.splitLines.map(parseInt)
  size = len(input)
 
 var second_part = newSeq[int](0)
