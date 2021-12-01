@@ -1,4 +1,4 @@
-import std/[strutils, sequtils, sugar]
+import std/[strutils, sequtils, math, sugar]
 
 const
  input = readFile("input.txt").strip.splitLines.map(parseInt)
@@ -6,7 +6,7 @@ const
 
 var second_part = newSeq[int](0)
 for i in 0..<size-2:
- second_part.add(input[i] + input[i+1] + input[i+2])
+ second_part.add(sum(input[i..i+2]))
 
 proc solve(values: seq) : int =
  for i in 1..<len(values):
