@@ -5,8 +5,7 @@ const
  input = readFile("input.txt").splitLines().filterIt(it != "").mapIt(parseInt(it))
  size = len(input)
 
-var
- second_part = newSeq[int](0)
+var second_part = newSeq[int](0)
 for i in 0..<size-2:
  second_part.add(input[i] + input[i+1] + input[i+2])
 
@@ -15,5 +14,5 @@ proc solve(values: seq) : int =
   if values[i] > values[i - 1]:
    result += 1
 
-echo solve(input)
-echo solve(second_part)
+echo "part 1: ", solve(input)
+echo "part 2: ", solve(second_part)
