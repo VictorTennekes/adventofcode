@@ -32,5 +32,5 @@ proc part2() : int =
      aim -= value
  return x * y
 
-echo part1()
-echo part2()
+echo "part 1: ", part1()
+echo "part 2: ", part2()
