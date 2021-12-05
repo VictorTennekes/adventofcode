@@ -4,23 +4,25 @@ let
  input = readFile("input.txt").strip.split("\n\n")
  size = input.len
 
-func getCards(rawCards: seq[string]): seq[seq[string]] =
- var cards = newSeq[newSeq[string](0)](0)
+type Card = seq[string]
+
+func getCards(rawCards: seq[string]): seq[Card] =
+ var cards: seq[seq[string]]
  for i in rawCards:
-  var card = newSeq[string](0)
+  var card: Card
   for j in i.splitLines:
    card.add(j.split(" ").filterIt(it.len != 0))
   cards.add(card)
  return cards
 
-func updateCard(card: seq[string], number: string): seq[string] =
+func updateCard(card: Card, number: string): Card =
  result = card
  for i in 0..result.high:
   if result[i] == number:
    result[i] = "x"
  return result
 
-func checkCard(card: seq[string]): bool =
+func checkCard(card: Card): bool =
  for i in 0..4:
   var tmp = card[i*5..i*5+4].join
   if tmp == "xxxxx":
@@ -33,7 +35,7 @@ func checkCard(card: seq[string]): bool =
    return true
  return false
 
-func calcScore(card: seq[string], num: string): int =
+func calcScore(card: Card, num: string): int =
  for i in card:
   if i != "x":
    result += parseInt(i)
@@ -43,7 +45,7 @@ proc solve() =
  var
   cards = getCards(input[1..size-1])
   winners: seq[int]
-  latestWin = newSeq[string](0)
+  latestWin: Card
   latestNum: string
   firstWin = false
 
