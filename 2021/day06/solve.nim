@@ -4,15 +4,12 @@ let input = readFile("input.txt").split(",")
 var fish = input.map(parseInt).toCountTable
 
 func nextDay(fish: CountTable[int]): CountTable[int] =
- for i in 0..8:
-  result[i] = 0
- for i, cnt in fish:
-  if i > 0:
-   result.inc(i-1, cnt)
+ for a, b in fish:
+  if a == 0:
+   result.inc(8, b)
+   result.inc(6, b)
   else:
-   result.inc(8, cnt)
-   result.inc(6, cnt)
- return (result)
+   result.inc(a - 1, b)
 
 for i in 0..<256:
  if i == 80:
