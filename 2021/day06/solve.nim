@@ -13,7 +13,7 @@ func nextDay(fish: CountTable[int]): CountTable[int] =
 
 for i in 0..<256:
  if i == 80:
-  echo "part 1: ", mvalues(fish).toSeq.foldl(a + b)
+  echo "part 1: ", fish.values.toSeq.foldl(a + b)
  fish = nextDay(fish)
 
-echo "part 2: ", mvalues(fish).toSeq.foldl(a + b)
+echo "part 2: ", fish.values.toSeq.foldl(a + b)
