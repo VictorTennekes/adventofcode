@@ -49,6 +49,5 @@ func part2(input: seq[string]): int =
     mid = strdiff(i, botr & topr & topl)
   result.inc(parseInt(codes[10..codes.high].mapIt(getValue(it, topr, botr, mid)).join))
 
-
 echo part1(input)
 echo part2(input)
