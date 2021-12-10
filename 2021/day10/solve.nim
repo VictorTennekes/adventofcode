@@ -3,6 +3,7 @@ import std/algorithm
 
 let
  input = readFile("input.txt").strip.split("\n")
+const
  closepoints = {')': 3, ']': 57, '}': 1197, '>': 25137}.toTable
  openpoints = {'(': 1, '[': 2, '{': 3, '<': 4}.toTable
  openclose = {'(': ')', '[': ']', '{': '}', '<': '>'}.toTable
@@ -30,4 +31,4 @@ for line in input:
   part2.add val
 
 echo "part 1: ", part1
-echo "part 2: ", part2.sorted(system.cmp[int])[part2.len div 2]
+echo "part 2: ", part2.sorted[part2.len div 2]
