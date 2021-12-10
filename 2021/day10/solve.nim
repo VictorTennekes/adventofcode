@@ -1,5 +1,4 @@
-include prelude
-import std/algorithm
+include ../aoc
 
 let
  input = readFile("input.txt").strip.split("\n")
