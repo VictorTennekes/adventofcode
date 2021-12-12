@@ -1,7 +1,7 @@
 include ../aoc
 
 var
- input = readFile("input.txt").strip.split("\n").mapIt(it.toSeq.mapIt(parseInt($it)))
+ input = readFile("input.txt").strip.split("\n").mapIt(it.mapIt(parseInt($it)))
 let
  h = input.len
  w = input[0].len
