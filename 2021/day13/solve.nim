@@ -13,7 +13,7 @@ proc printMap(topY, topX: int) =
  for y in 0..topY:
   var line = ""
   for x in 0..topX:
-   if (y, x) in points: line &= "#"
+   if (y, x) in points: line &= "█"
    else: line &= " "
   echo line
 
