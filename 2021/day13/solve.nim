@@ -14,7 +14,7 @@ proc printMap(topY, topX: int) =
   var line = ""
   for x in 0..topX:
    if (y, x) in points: line &= "#"
-   else: line &= "."
+   else: line &= " "
   echo line
 
 func fold(points: HashSet[Point], foldvalue: int, dimensionX: bool): HashSet[Point] =
