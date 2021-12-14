@@ -22,7 +22,7 @@ func fold(points: HashSet[Point], foldvalue: int, dimensionX: bool): HashSet[Poi
   if dimensionX and dot[1] > foldvalue:
    result.incl (dot[0], foldvalue*2 - dot[1])
   elif not dimensionX and dot[0] > foldvalue:
-   result.incl  (foldvalue*2 - dot[0], dot[1])
+   result.incl (foldvalue*2 - dot[0], dot[1])
   else:
    result.incl dot
 
