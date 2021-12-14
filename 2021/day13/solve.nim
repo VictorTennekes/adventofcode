@@ -31,8 +31,8 @@ for i in input[0].split("\n"):
  if ok:
   points.incl (y, x)
 
-for index in 0..folds.high:
- let (ok, axis, value) = scanTuple(folds[index], "fold along $*=$i")
+for index, fold in folds:
+ let (ok, axis, value) = scanTuple(fold, "fold along $w=$i")
  if ok:
   if axis == "x":
    points = fold(points, value, true)
