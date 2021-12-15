@@ -52,9 +52,10 @@ proc part1(data: Grid[int]): int =
 proc part2(data: Grid[int]): int =
  var path: Path
  var grid2: seq[seq[int]]
- for i in 0..4:
+ for y in 0..4:
   for r in grid:
-   grid2.add r.mapIt((it + i + 8)mod 9 + 1)&r.mapIt((it + i + 0)mod 9 + 1)&r.mapIt((it + i + 1)mod 9 + 1)&r.mapIt((it + i + 2)mod 9 + 1)&r.mapIt((it + i + 3)mod 9 + 1)
+   let r = r
+   grid2.add concat toSeq(0..4).map(x => r.mapIt((it + x + y + 8) mod 9 + 1))
  (path, result) = grid2.aStar((0,0), (grid2.height-1, grid2.width-1))
 
 echo "part 1: ", part1(grid)
