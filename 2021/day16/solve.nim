@@ -1,6 +1,6 @@
 include ../aoc
 
-var data = readFile("input.txt").strip.mapIt(parseHexInt($it).toBin(4)).join
+var data = readFile("input.txt").mapIt(parseHexInt($it).toBin(4)).join
 
 type
  Packet = object

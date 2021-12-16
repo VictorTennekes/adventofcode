@@ -7,6 +7,9 @@ let
 
 type Path = seq[Point]
 
+func manhattan(a: Point, b: Point): int =
+ abs(b.y - a.y) + abs(b.x - a.x)
+
 proc buildPath(cameFrom: Table[Point, Point], start, goal: Point): Path =
   result.add(goal)
   var current = goal
@@ -42,7 +45,8 @@ proc aStar(grid: Grid[int], start: Point, goal: Point): (Path, int) =
    let newCost = costTotal[current] + grid[next.y][next.x]
    if next notin costTotal or newCost < costTotal[next]:
     costTotal[next] = newCost
-    frontier.push((newCost, next))
+    let prio = newCost + next.manhattan(goal)
+    frontier.push((prio, next))
     previous[next] = current
 
 proc part1(data: Grid[int]): int =
