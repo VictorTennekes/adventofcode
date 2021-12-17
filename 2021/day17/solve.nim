@@ -31,5 +31,5 @@ for y in minY..minX:
   if shoot(x, y):
    hits.inc
 
-echo (minY)*(minY+1) div 2
-echo hits
+echo "part 1: ", (minY)*(minY+1) div 2
+echo "part 2: ", hits
