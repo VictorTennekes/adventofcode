@@ -10,7 +10,7 @@ template `+`*(a,b:Point3):Point3 = (a.x+b.x, a.y+b.y, a.z+b.z)
 template `-`*(a,b:Point3):Point3 = (a.x-b.x, a.y-b.y, a.z-b.z)
 template `-`*(a:Point3):Point3 = (-a.x, -a.y, -a.z)
 
-func permute(p: Point3, perm: int): Point3 =
+func rotations(p: Point3, perm: int): Point3 =
  case perm:
   of 1: return (p.x, -p.y, -p.z)
   of 2: return (-p.x, p.y, -p.z)
@@ -41,10 +41,10 @@ func permute(p: Point3, perm: int): Point3 =
 
 func permuteScanner(scanner: seq[Point3], index: int): seq[Point3] =
  for beacon in scanner:
-  let rs = beacon.permute(index)
+  let rs = beacon.rotations(index)
   result.add rs
 
-let input = readFile("test.txt").strip.split("\n\n")
+let input = readFile("input.txt").strip.split("\n\n")
 var scanners: seq[seq[(Point3)]]
 for part in input:
  var scanner: seq[Point3]
@@ -65,13 +65,18 @@ func checkOverlap(a, b: seq[Point3]): (bool, Point3) =
 
 var normalScanners: HashSet[Point3]
 let anchor = scanners[0]
+scanners.delete(0)
 normalScanners.incl anchor.toHashSet
-for scanner in scanners[1..^1]:
- for i in 0..23:
-  var rs = permuteScanner(scanner, i)
-  let (valid, translation) = checkOverlap(normalScanners.toSeq, rs)
-  if (valid):
-   rs = rs.map(a => a + translation)
-   normalScanners.incl rs.toHashSet
+while scanners.len > 0:
+ var tmpScanners = scanners
+ for index, scanner in tmpScanners:
+  for i in 0..23:
+   var rs = permuteScanner(scanner, i)
+   let (valid, translation) = checkOverlap(normalScanners.toSeq, rs)
+   if (valid):
+    rs = rs.map(a => a + translation)
+    normalScanners.incl rs.toHashSet
+    scanners.delete(index)
+    break
 
 echo normalScanners.len
