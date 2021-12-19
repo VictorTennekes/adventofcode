@@ -6,6 +6,7 @@ type
   y: int
   z: int
 
+template `$`*(a:Point3):string = ($a.x & "," & $a.y & "," & $a.z)
 template `+`*(a,b:Point3):Point3 = (a.x+b.x, a.y+b.y, a.z+b.z)
 template `-`*(a,b:Point3):Point3 = (a.x-b.x, a.y-b.y, a.z-b.z)
 template `-`*(a:Point3):Point3 = (-a.x, -a.y, -a.z)
@@ -64,19 +65,22 @@ func checkOverlap(a, b: seq[Point3]): (bool, Point3) =
  return (false, (0,0,0))
 
 var normalScanners: HashSet[Point3]
+var points: HashSet[Point3]
 let anchor = scanners[0]
 scanners.delete(0)
 normalScanners.incl anchor.toHashSet
 while scanners.len > 0:
  var tmpScanners = scanners
  for index, scanner in tmpScanners:
-  for i in 0..23:
-   var rs = permuteScanner(scanner, i)
-   let (valid, translation) = checkOverlap(normalScanners.toSeq, rs)
-   if (valid):
-    rs = rs.map(a => a + translation)
-    normalScanners.incl rs.toHashSet
-    scanners.delete(index)
-    break
+  block permutation:
+   for i in 0..23:
+    var rs = permuteScanner(scanner, i)
+    let (valid, translation) = checkOverlap(normalScanners.toSeq, rs)
+    if (valid):
+      points.incl translation
+      rs = rs.map(a => a + translation)
+      normalScanners.incl rs.toHashSet
+      scanners.delete(index)
+      break permutation
 
 echo normalScanners.len
