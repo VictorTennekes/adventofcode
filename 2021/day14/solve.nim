@@ -1,6 +1,6 @@
 include ../aoc
 
-let input = readFile("test.txt").strip.split("\n\n")
+let input = readFile("input.txt").strip.split("\n\n")
 var poly = input[0]
 
 func getRules(rules: seq[string]): Table[string, string] =
