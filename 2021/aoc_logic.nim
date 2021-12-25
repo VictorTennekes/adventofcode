@@ -1,3 +1,5 @@
+include prelude
+
 ## Grid and point
 type Grid*[T] = seq[seq[T]]
 type Point* = (int, int)
@@ -12,5 +14,7 @@ const
 func height*(data:Grid):int = len data
 func width*(data:Grid):int = len data[0]
 
-proc `[]`(self: Grid, point: Point): int =
-  self[point.row][point.col]
+template `[]`*[T](data:Grid[T], index:Point):T =
+ data[index.y][index.x]
+template `[]=`*[T](data: var Grid[T], index: Point, val: T) =
+ data[index.y][index.x] = val
